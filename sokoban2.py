@@ -81,13 +81,13 @@ class Instructions:
          
 #movimiento arriba
     def move_up (self):
-          if self.mapa[self.position_row-1][self.position_col]!=2 and self.mapa[self.position_row-1][self.position_col]!=1:
+        if self.mapa[self.position_row-1][self.position_col]!=2 and self.mapa[self.position_row-1][self.position_col]!=1:
             self.position_row=self.position_row-1
             self.mapa[self.position_row][self.position_col]=0
-            self.mapa[tem_row][tem_col]=4
-            self.tem_raw=self.position_raw
+            self.mapa[self.tem_row][self.tem_col]=4
+            self.tem_row=self.position_row
             self.tem_col=self.position_col
-    elif self.maps[self.position_raw-1][self.position_col]!=2 and self.maps[self.position_raw-1][self.position_col]==1 and self.maps[self.position_raw-2][self.position_col]!=2 and self.maps[self.position_raw-2][self.position_col]!=1: 
+        elif self.mapa[self.position_row-1][self.position_col]!=2 and self.mapa[self.position_row-1][self.position_col]==1 and self.mapa[self.position_row-2][self.position_col]!=2 and self.mapa[self.position_row-2][self.position_col]!=1: 
             self.mapa[self.position_col and self.position_row]=0
 #movimiento abajo 
     def move_down (self):
