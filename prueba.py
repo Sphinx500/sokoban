@@ -11,7 +11,7 @@ class Game:
         self.maps=[
         [2,2,2,2,2,2,2,2,2,2,2,2],
         [2,4,4,4,4,4,4,4,4,4,4,2],
-        [2,0,1,4,4,1,4,4,4,4,4,2],
+        [2,0,4,4,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,2],
         [2,2,2,2,4,4,4,4,4,4,4,2]]
@@ -34,34 +34,27 @@ class Game:
 
 #IZQUIERDA
     def move_left (self):
-        if self.maps[self.position_row][self.position_col-1]!=2 and self.maps[self.position_row][self.position_col-1]!=1:
-            self.position_col=self.position_col-1
-            self.maps[self.position_row][self.position_col]=0   
-            self.maps[self.tem_row][self.tem_col]=4
+         if self.maps[position_row][position_col+1]
             self.tem_row=self.position_row
             self.tem_col=self.position_col
-            
+            self.position_col=self.position_col-1
+            self.maps[self.tem_row][self.tem_col]=4
+            self.maps[self.position_col][self.position_row]=0
+"""
         elif self.maps[self.position_row][self.position_col-1]!=2 and self.maps[self.position_row][self.position_col-1]==1 and self.maps[self.position_row][self.position_col-2]!=2 and self.maps[self.position_row][self.position_col-2]!=1: 
-            """
             self.position_col=self.position_col-1
             self.caja_col=self.position_col-1
             self.caja_row=self.position_row
-            """
+"""
 #DERECHA
     def move_right (self):
-        if self.maps[self.position_col+1]!=2 and self.maps[self.position_row][self.position_col+1]!=1:
-            self.position_col=self.position_col+1
-            self.maps[self.position_col][self.position_row]=0
-            self.maps[self.tem_row][self.tem_col]=4
+        if self.maps[position_row][position_col+1]
             self.tem_row=self.position_row
             self.tem_col=self.position_col
-     
-        elif self.maps[self.position_row][self.position_col+1]!=2 and self.maps[self.position_col][self.position_row+1]==1:
-           self.position_col=self.position_col+1
-           """                      
-            self.caja_col=self.position_col+1
-            self.caja_row=self.position_row
-        """
+            self.position_col=self.position_col+1
+            self.maps[self.tem_row][self.tem_col]=4
+            self.maps[self.position_col][self.position_row]=0
+
     def jugar(self):
         self.crear()
         self.posicion()
