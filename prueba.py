@@ -34,39 +34,33 @@ class Game:
 
 #IZQUIERDA
     def move_left (self):
-        if self.maps[self.position_row][self.position_col+1]!=2:
-            self.tem_row=self.position_row
-            self.tem_col=self.position_col
+        if self.maps[self.position_row][self.position_col+1]==4:
             self.position_col=self.position_col-1
             self.maps[self.position_col][self.position_row]=0
             self.maps[self.tem_row][self.tem_col]=4
-            self.tem_col=self.position_col
+            self.tem_row=self.position_row
 
 #DERECHA
     def move_right (self):
-        if self.maps[self.position_row][self.position_col+1]!=2:
-            self.tem_row=self.position_row
-            self.tem_col=self.position_col
+        if self.maps[self.position_row][self.position_col+1]==4:
             self.position_col=self.position_col+1
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.position_col][self.position_row]=0
+            self.tem_col=self.position_col
 #ARRIBA
     def move_up (self):
-         if self.maps[self.position_row-1][self.position_col]!=2:
-             self.tem_row=self.position_row
-             self.tem_col=self.position_col
+         if self.maps[self.position_row-1][self.position_col]==4:
              self.position_row=self.position_row-1
              self.maps[self.tem_row][self.tem_col]=4
              self.maps[self.position_col][self.position_row]=0
+             self.tem_row=self.position_row
 #ABAJO
     def move_down (self):
-         if self.maps[self.position_row+1][self.position_col]!=2:
-             self.tem_row=self.position_row
-             self.tem_col=self.position_col
+         if self.maps[self.position_row+1][self.position_col]==4:
              self.position_row=self.position_row+1
              self.maps[self.tem_row][self.tem_col]=4
              self.maps[self.position_col][self.position_row]=0
-
+             self.tem_row=self.position_row
     def jugar(self):
         self.crear()
         self.posicion()
