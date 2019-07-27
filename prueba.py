@@ -34,11 +34,20 @@ class Game:
 
 #IZQUIERDA
     def move_left (self):
-        if self.maps[self.position_row][self.position_col+1]==4:
+        if self.maps[self.position_row][self.position_col-1]==4:
+            self.tem_col=self.position_col
             self.position_col=self.position_col-1
-            self.maps[self.position_col][self.position_row]=0
             self.maps[self.tem_row][self.tem_col]=4
-            self.tem_row=self.position_row
+            self.maps[self.position_col][self.position_row]=0
+            #mueve la caja
+        elif self.maps[self.position_row][self.position_col-1]!=2 and self.maps[self.position_row][self.position_col-1]==1 and self.maps[self.position_row][self.position_col-2]!=2 and self.maps[self.position_row][self.position_col-2]!=1: 
+            self.position_col=self.position_col-1
+            self.caja_col=self.position_col-1
+            self.caja_row=self.position_row
+            self.maps[self.position_row][self.position_col]=0
+            self.maps[self.tem_row][self.tem_col]=4
+            self.maps[self.caja_row][self.caja_col]=1
+            
 
 #DERECHA
     def move_right (self):
@@ -47,20 +56,52 @@ class Game:
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.position_col][self.position_row]=0
             self.tem_col=self.position_col
+            #mueve la caja
+        elif self.maps[self.position_row][self.position_col+1]!=2 and self.maps[self.position_row][self.position_col+1]==1 and self.maps[self.position_row][self.position_col+2]!=2 and self.maps[self.position_row][self.position_col+2]!=1 :
+            self.position_col=self.position_col+1
+            self.caja_col=self.position_col+1
+            self.caja_row=self.position_row
+
+            self.maps[self.position_row][self.position_col]=0
+            self.maps[self.tem_row][self.tem_col]=4
+            self.maps[self.caja_row][self.caja_col]=1
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
 #ARRIBA
     def move_up (self):
-         if self.maps[self.position_row-1][self.position_col]==4:
+        if self.maps[self.position_row-1][self.position_col]==4:
              self.position_row=self.position_row-1
              self.maps[self.tem_row][self.tem_col]=4
              self.maps[self.position_col][self.position_row]=0
              self.tem_row=self.position_row
+        elif self.maps[self.position_row-1][self.position_col]!=2 and self.maps[self.position_row-1][self.position_col]==1 and self.maps[self.position_row-2][self.position_col]!=2 and self.maps[self.position_row-2][self.position_col]!=1: 
+            self.position_row=self.position_row-1
+            self.caja_row=self.position_row-1
+            self.caja_col=self.position_col
+#mueve la caja
+            self.maps[self.position_row][self.position_col]=0   
+            self.maps[self.tem_row][self.tem_col]=4
+            self.maps[self.caja_row][self.caja_col]=1
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col      
 #ABAJO
     def move_down (self):
-         if self.maps[self.position_row+1][self.position_col]==4:
+        if self.maps[self.position_row+1][self.position_col]==4:
              self.position_row=self.position_row+1
              self.maps[self.tem_row][self.tem_col]=4
              self.maps[self.position_col][self.position_row]=0
              self.tem_row=self.position_row
+        elif self.maps[self.position_row+1][self.position_col]!=2 and self.maps[self.position_row+1][self.position_col]==1 and self.maps[self.position_row+2][self.position_col]!=2 and self.maps[self.position_row+2][self.position_col]!=1: 
+            self.position_row=self.position_row+1
+            self.caja_row=self.position_row+1
+            self.caja_col=self.position_col
+#mueve la caja            
+            self.maps[self.position_row] [self.position_col]=0
+            self.maps[self.tem_row][self.tem_col]=4
+            self.maps[self.caja_row][self.tem_col]=1
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+#para iniciar el juego    
     def jugar(self):
         self.crear()
         self.posicion()
