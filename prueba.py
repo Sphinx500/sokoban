@@ -1,3 +1,11 @@
+"""
+0-Personaje
+1-Cajas
+2-Paredes
+3-Metas
+4-Pasillos
+5-Caja/meta
+"""
 class Game:
     def __init__(self):
         self.maps=[[]]
@@ -7,6 +15,8 @@ class Game:
         self.tem_col=0
         self.caja_row=0
         self.caja_col=0
+        self.pared_col=0
+        self.pared_row=0
     def crear(self):
         self.maps=[
         [2,2,2,2,2,2,2,2,2,2,2,2],
@@ -47,7 +57,12 @@ class Game:
             self.maps[self.position_row][self.position_col]=0
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.caja_row][self.caja_col]=1
-            
+#chocar con pared
+        elif self.maps[self.position_row][self.position_col-1]==2:
+            self.maps[self.position_row][self.position_col]=0
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+        
 
 #DERECHA
     def move_right (self):
@@ -67,6 +82,11 @@ class Game:
             self.maps[self.caja_row][self.caja_col]=1
             self.tem_row=self.position_row
             self.tem_col=self.position_col
+        #chocar con pared
+        elif self.maps[self.position_row][self.position_col+1]==2:
+            self.maps[self.position_row][self.position_col]=0
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
 #ARRIBA
     def move_up (self):
         if self.maps[self.position_row-1][self.position_col]==4:
@@ -79,11 +99,16 @@ class Game:
             self.caja_row=self.position_row-1
             self.caja_col=self.position_col
 #mueve la caja
-            self.maps[self.position_row][self.position_col]=0   
+            self.maps[self.position_row][self.position_col]=0
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.caja_row][self.caja_col]=1
             self.tem_row=self.position_row
-            self.tem_col=self.position_col      
+            self.tem_col=self.position_col
+        #chocar con pared
+        elif self.maps[self.position_row-1][self.position_col]==2:
+            self.maps[self.position_row][self.position_col]=0
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
 #ABAJO
     def move_down (self):
         if self.maps[self.position_row+1][self.position_col]==4:
@@ -99,6 +124,11 @@ class Game:
             self.maps[self.position_row] [self.position_col]=0
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.caja_row][self.tem_col]=1
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+            #chocar con pared
+        elif self.maps[self.position_row+1][self.position_col]==2:
+            self.maps[self.position_row][self.position_col]=0
             self.tem_row=self.position_row
             self.tem_col=self.position_col
 #para iniciar el juego    
