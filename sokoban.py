@@ -6,14 +6,10 @@
 4-pasillos
 5-caja/meta
 """
-#map=[2,4,4,4,0,4,4,1,3,2]
-#print(map)
+
 map=[2,4,4,4,0,4,4,4,2]
 position_x=4
-#position_x=position_x+1
-#right
-#position_x=position_x-1
-#left
+
 while True:
     print (map)
     move=raw_input("D-right,A-Left")
@@ -25,4 +21,3 @@ while True:
          position_x=position_x-1
     map[tem_x]=4
     map[position_x]=0
-
