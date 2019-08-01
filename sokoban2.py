@@ -20,10 +20,11 @@ class Sokoban:
     def crear(self):
         self.maps=[
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
-        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
-        [2,4,0,1,4,3,4,4,4,4,4,4,4,4,4,2],
-        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,1,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,3,1,0,1,3,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,1,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]]
         
     def mapa(self):
@@ -93,16 +94,16 @@ class Sokoban:
              self.maps[self.position_row][self.position_col]=0 
              self.maps[self.position_row][self.position_col-1]=5
              self.maps[self.position_row][self.position_col+1]=4
-
+#MOVIMIENTO ARRIBA
     def arriba(self):
-        if self.maps[self.position_row-1][self.position_col]!=2 and self.maps[self.position_row-1][self.position_col]!=1:
+        if self.maps[self.position_row-1][self.position_col]== 4:
             self.position_row=self.position_row-1
             self.maps[self.position_row][self.position_col]=0
             self.maps[self.tem_row][self.tem_col]=4
             self.tem_row=self.position_row
             self.tem_col=self.position_col
 #mueve la caja
-        elif self.maps[self.position_row-1][self.position_col]!=2 and self.maps[self.position_row-1][self.position_col]==1 and self.maps[self.position_row-2][self.position_col]!=2 and self.maps[self.position_row-2][self.position_col]!=1: 
+        elif self.maps[self.position_row-1][self.position_col]==1 and self.maps[self.position_row-2][self.position_col]==4: 
             self.position_row=self.position_row-1
             self.caja_row=self.position_row-1
             self.caja_col=self.position_col
@@ -110,27 +111,39 @@ class Sokoban:
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.caja_row][self.caja_col]=1
             self.tem_row=self.position_row
-            self.tem_col=self.position_col      
+            self.tem_col=self.position_col
+#meta 
+        elif self.maps[self.position_row-1][self.position_col]==1 and self.maps[self.position_row-2][self.position_col]==3:
+             self.position_row=self.position_row-1
+             self.maps[self.position_row][self.position_col]=0 
+             self.maps[self.position_row-1][self.position_col]=5
+             self.maps[self.position_row+1][self.position_col]=4
     
     def abajo(self):
 #ABAJO
-        if self.maps[self.position_row+1][self.position_col]!=2 and self.maps[self.position_row+1][self.position_col]!=1:
+        if self.maps[self.position_row+1][self.position_col]== 4:
             self.position_row=self.position_row+1
-            self.maps[self.position_row][self.position_col]=0   
+            self.maps[self.position_row][self.position_col]=0
             self.maps[self.tem_row][self.tem_col]=4
             self.tem_row=self.position_row
             self.tem_col=self.position_col
 #mueve la caja
-        elif self.maps[self.position_row+1][self.position_col]!=2 and self.maps[self.position_row+1][self.position_col]==1 and self.maps[self.position_row+2][self.position_col]!=2 and self.maps[self.position_row+2][self.position_col]!=1: 
-            self.position_row=self.position_row+1
-            self.caja_row=self.position_row+1
-            self.caja_col=self.position_col
-            self.maps[self.position_row][self.position_col]=0 
+        elif self.maps[self.position_row][self.position_col+1]==1 and self.maps[self.position_row][self.position_col+2]==4: 
+            self.position_col=self.position_col+1
+            self.caja_col=self.position_col+1
+            self.caja_row=self.position_row
+            self.maps[self.position_row][self.position_col]=0   
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.caja_row][self.caja_col]=1
             self.tem_row=self.position_row
-            self.tem_col=self.position_col 
-                               
+            self.tem_col=self.position_col
+#meta 
+        elif self.maps[self.position_row+1][self.position_col]==1 and self.maps[self.position_row+2][self.position_col]==3:
+             self.position_row=self.position_row+1
+             self.maps[self.position_row][self.position_col]=0 
+             self.maps[self.position_row][self.position_col+1]=5
+             self.maps[self.position_row][self.position_col-1]=4
+
     def jugar(self):
         self.crear()
         self.posicion()
