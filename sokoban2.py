@@ -24,12 +24,13 @@ class Sokoban:
     def crear(self):
         self.maps=[
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-        [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
-        [2,4,4,4,4,4,4,1,4,4,4,4,4,4,4,2],
-        [2,4,3,1,4,4,4,0,4,1,3,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
+        [2,4,3,1,4,4,4,1,4,1,3,4,4,4,4,2],
+        [2,4,4,4,4,4,4,0,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,1,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]]
         
     def mapa(self):
@@ -46,8 +47,12 @@ class Sokoban:
                     self.position_col=j
                     self.tem_row=self.position_row
                     self.tem_col=self.position_col
-
-
+    def cont_cajas (self):
+        caja=1
+        for caja in range(len(self.maps)):
+            print(self.maps[caja])
+            caja=caja+1
+            print ("CAJAS RESTANTES: ",caja)
     def derecha(self):
 #DERECHA
         if self.maps[self.position_row][self.position_col+1]== 4:
@@ -111,7 +116,24 @@ class Sokoban:
             self.maps[self.caja_row][self.caja_col]=1
             self.tem_row=self.position_row
             self.tem_col=self.position_col
-        #meta 
+#saca la caja de la meta
+        elif self.maps[self.position_row][self.position_col]==0 and self.maps[self.position_row][self.position_col-1]==5 and self.maps[self.position_row][self.position_col-2]==4:
+            self.position_col=self.position_col-1
+            self.caja_col=self.caja_col-1
+            self.maps[self.position_row][self.position_col]=6 
+            self.maps[self.position_row][self.position_col-1]=1
+            self.maps[self.tem_row][self.tem_col]=4
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+        elif self.maps[self.position_row][self.position_col]==6 and self.maps[self.position_row][self.position_col-1]==1 and self.maps[self.position_row][self.position_col-2]==4:
+            self.position_col=self.position_col-1
+            self.caja_col=self.caja_col-1
+            self.maps[self.position_row][self.position_col]=0
+            self.maps[self.position_row][self.position_col-1]=1
+            self.maps[self.position_row][self.position_col+1]=3
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+#meta 
         elif self.maps[self.position_row][self.position_col-1]==1 and self.maps[self.position_row][self.position_col-2]==3:
              self.position_col=self.position_col-1
              self.maps[self.position_row][self.position_col]=0 
@@ -137,6 +159,23 @@ class Sokoban:
             self.maps[self.position_row][self.position_col]=0 
             self.maps[self.tem_row][self.tem_col]=4
             self.maps[self.caja_row][self.caja_col]=1
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+#saca la caja de la meta
+        elif self.maps[self.position_row][self.position_col]==0 and self.maps[self.position_row-1][self.position_col]==5 and self.maps[self.position_row-2][self.position_col]==4:
+            self.position_row=self.position_row-1
+            self.caja_row=self.caja_row-1
+            self.maps[self.position_row][self.position_col]=6 
+            self.maps[self.position_row-1][self.position_col]=1
+            self.maps[self.tem_row][self.tem_col]=4
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+        elif self.maps[self.position_row][self.position_col]==6 and self.maps[self.position_row-1][self.position_col]==1 and self.maps[self.position_row-2][self.position_col]==4:
+            self.position_row=self.position_row-1
+            self.caja_row=self.caja_row-1
+            self.maps[self.position_row][self.position_col]=0
+            self.maps[self.position_row-1][self.position_col]=1
+            self.maps[self.position_row+1][self.position_col]=3
             self.tem_row=self.position_row
             self.tem_col=self.position_col
         
@@ -167,6 +206,23 @@ class Sokoban:
             self.maps[self.caja_row][self.caja_col]=1
             self.tem_row=self.position_row
             self.tem_col=self.position_col
+#saca la caja de la meta
+        elif self.maps[self.position_row][self.position_col]==0 and self.maps[self.position_row+1][self.position_col]==5 and self.maps[self.position_row+2][self.position_col]==4:
+            self.position_row=self.position_row+1
+            self.caja_row=self.caja_row+1
+            self.maps[self.position_row][self.position_col]=6 
+            self.maps[self.position_row+1][self.position_col]=1
+            self.maps[self.tem_row][self.tem_col]=4
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+        elif self.maps[self.position_row][self.position_col]==6 and self.maps[self.position_row+1][self.position_col]==1 and self.maps[self.position_row+2][self.position_col]==4:
+            self.position_row=self.position_row+1
+            self.caja_row=self.caja_row+1
+            self.maps[self.position_row][self.position_col]=0
+            self.maps[self.position_row-1][self.position_col]=1
+            self.maps[self.position_row+1][self.position_col]=3
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
 #meta 
         elif self.maps[self.position_row][self.position_col]==0 and self.maps[self.position_row+1][self.position_col]==1 and self.maps[self.position_row+2][self.position_col]==3:
              self.position_row=self.position_row+1
@@ -180,7 +236,6 @@ class Sokoban:
 
 
 #CONTADOR DE CAJAS
-    
 
     def jugar(self):
         self.crear()
@@ -196,7 +251,7 @@ class Sokoban:
                 self.abajo()
             elif move=="w" or move=="W":
                 self.arriba()
-
+        self.cont_cajas()
 
 sphinx=Sokoban()
 sphinx.jugar()
