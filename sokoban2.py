@@ -57,7 +57,7 @@ class Sokoban:
             for y in range(len(self.maps[x])):
                 if self.maps[x][y]==1:
                     caja=caja+1
-                    print("CAJAS RESTANTES ",caja)
+        print("CAJAS RESTANTES ",caja)
 
 
 #DERECHA
