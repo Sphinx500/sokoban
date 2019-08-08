@@ -21,13 +21,15 @@ class Sokoban:
         self.meta_row=0
         self.caja=0
         self.personaje_meta=0
+        self.contador_caja=0
+        self.caja_lugar=0
     def crear(self):
         self.maps=[
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
-        [2,4,3,1,4,4,4,1,4,1,3,4,4,4,4,2],
-        [2,4,4,4,4,4,4,0,4,4,4,4,4,4,4,2],
+        [2,4,3,4,4,4,4,4,4,4,3,4,4,4,4,2],
+        [2,4,4,4,1,4,4,0,4,4,4,4,1,4,4,2],
         [2,4,4,4,4,4,4,1,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
@@ -39,6 +41,7 @@ class Sokoban:
         for cont in range(len(self.maps)):
             print(self.maps[cont])
             cont=cont+1
+
     def posicion(self):
         for i in range(len(self.maps)):
             for j in range(len(self.maps[i])):
@@ -47,14 +50,18 @@ class Sokoban:
                     self.position_col=j
                     self.tem_row=self.position_row
                     self.tem_col=self.position_col
+#CONTADOR DE CAJAS 
     def cont_cajas (self):
-        caja=1
-        for caja in range(len(self.maps)):
-            print(self.maps[caja])
-            caja=caja+1
-            print ("CAJAS RESTANTES: ",caja)
-    def derecha(self):
+        caja=0
+        for x in range(len(self.maps)):
+            for y in range(len(self.maps[x])):
+                if self.maps[x][y]==1:
+                    caja=caja+1
+                    print("CAJAS RESTANTES ",caja)
+
+
 #DERECHA
+    def derecha(self):
         if self.maps[self.position_row][self.position_col+1]== 4:
             self.position_col=self.position_col+1
             self.maps[self.position_row][self.position_col]=0
@@ -85,7 +92,7 @@ class Sokoban:
             self.caja_col=self.caja_col+1
             self.maps[self.position_row][self.position_col]=0
             self.maps[self.position_row][self.position_col+1]=1
-            self.maps[self.position_row][self.position_col-1]=3
+            self.maps[self.position_row][self.position_col+0]=3
             self.tem_row=self.position_row
             self.tem_col=self.position_col
 #meta 
@@ -235,13 +242,14 @@ class Sokoban:
 
 
 
-#CONTADOR DE CAJAS
+
 
     def jugar(self):
         self.crear()
         self.posicion()
         while True:
             self.mapa()
+            self.cont_cajas()
             move=raw_input("D-right,A-left,W-up,S-down")
             if move == "d" or move=="D" :
                 self.derecha()
@@ -251,7 +259,7 @@ class Sokoban:
                 self.abajo()
             elif move=="w" or move=="W":
                 self.arriba()
-        self.cont_cajas()
+        
 
 sphinx=Sokoban()
 sphinx.jugar()
