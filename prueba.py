@@ -1,11 +1,16 @@
+import os
+import msvcrt
+
 """
 0-Personaje
 1-Cajas
-2-Paredes
+2-Muros
 3-Metas
 4-Pasillos
 5-Caja/meta
 6-Personaje/Meta
+7-Paredes
+8-personaje/pared
 """
 
 class Sokoban:
@@ -25,14 +30,15 @@ class Sokoban:
         self.contador_caja=0
         self.caja_lugar=0
         self.con=0
+        self.power=0
     def crear(self):
         self.level_1=[
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
-        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
-        [2,4,4,3,1,4,4,0,4,4,1,4,3,4,4,2],
-        [2,4,4,4,4,4,4,1,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,4,7,4,4,4,4,4,4,2],
+        [2,4,4,3,1,4,4,0,7,1,4,4,3,4,4,2],
+        [2,4,4,4,4,4,4,1,7,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]]
@@ -97,8 +103,15 @@ class Sokoban:
              self.level_1[self.position_row][self.position_col-1]=4
              self.tem_row=self.position_row
              self.tem_col=self.position_col
-           
-    
+#powerup
+    def poder_der(self):
+        if self.level_1[self.position_row][self.position_col]==0 and self.level_1[self.position_row][self.position_col+1]==7 and self.level_1[self.position_row][self.position_col+2]==4:
+            self.position_col=self.position_col+1
+            self.level_1[self.position_row][self.position_col]=8
+            self.level_1[self.tem_row][self.tem_col]=4
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+
     def izquierda(self):
 #IZQUIERDA
         if self.level_1[self.position_row][self.position_col-1]== 4:
@@ -142,7 +155,15 @@ class Sokoban:
              self.level_1[self.position_row][self.position_col+1]=4
              self.tem_row=self.position_row
              self.tem_col=self.position_col
-
+#powerup
+    def poder_izq(self):
+        if self.level_1[self.position_row][self.position_col]==0 and self.level_1[self.position_row][self.position_col-1]==7 and self.level_1[self.position_row][self.position_col-2]==4:
+            self.position_col=self.position_col+1
+            self.level_1[self.position_row][self.position_col]=8
+            self.level_1[self.tem_row][self.tem_col]=4
+            self.tem_row=self.position_row
+            self.tem_col=self.position_col
+            
 
 #MOVIMIENTO ARRIBA
     def arriba(self):
@@ -257,7 +278,7 @@ class Sokoban:
         while True:
             self.mapa()
             self.cont_cajas()
-            move=raw_input("D-right,A-left,W-up,S-down")
+            move=raw_input("D-right,A-left,W-up,S-down,")
             if move == "d" or move=="D" :
                 self.derecha()
             elif move=="a" or move=="A":
@@ -266,7 +287,10 @@ class Sokoban:
                 self.abajo()
             elif move=="w" or move=="W":
                 self.arriba()
-        
+                self.power=raw_input
+            elif move=="j" or move=="J":
+                self.poder_der()
+            os.system("cls")
 
 sphinx=Sokoban()
 sphinx.jugar()
