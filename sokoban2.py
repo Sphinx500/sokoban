@@ -25,35 +25,65 @@ class Sokoban:
         self.caja_col=0
         self.meta_col=0
         self.meta_row=0
-        self.caja=0
+        self.caja1=0
+        self.caja2=0
         self.personaje_meta=0
         self.contador_caja=0
         self.caja_lugar=0
         self.con=0
         self.power=0
-    def crear(self):
+    
+    def crear_1(self):
         self.level_1=[
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
-        [2,4,4,4,4,4,4,7,4,4,4,4,4,4,4,2],
-        [2,4,4,3,1,4,7,0,7,4,1,4,3,4,4,2],
+        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
+        [2,4,4,3,1,4,4,0,4,4,1,4,3,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
         [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]]
         
-    def mapa(self):
+    def mapa_1(self):
         
         cont=0
         for cont in range(len(self.level_1)):
             print(self.level_1[cont])
             cont=cont+1
 
-    def posicion(self):
+    def posicion_1(self):
         for i in range(len(self.level_1)):
             for j in range(len(self.level_1[i])):
                 if self.level_1[i][j]==0:
+                    self.position_row=i
+                    self.position_col=j
+                    self.tem_row=self.position_row
+                    self.tem_col=self.position_col
+
+    def crear_2(self):
+        self.level_2=[
+        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
+        [2,4,4,4,4,4,4,3,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,1,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,0,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
+        [2,4,4,4,4,4,4,4,4,4,4,4,4,4,4,2],
+        [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]]
+        
+    def mapa_2(self):
+        
+        cont=0
+        for cont in range(len(self.level_2)):
+            print(self.level_2[cont])
+            cont=cont+1
+
+    def posicion_2(self):
+        for i in range(len(self.level_2)):
+            for j in range(len(self.level_2[i])):
+                if self.level_2[i][j]==0:
                     self.position_row=i
                     self.position_col=j
                     self.tem_row=self.position_row
@@ -281,52 +311,100 @@ class Sokoban:
             self.tem_col=self.position_col
 
 #CONTADOR DE CAJAS 
-    def cont_cajas (self):
-        caja=0
+    def cont_cajas1 (self):
+        self.caja1=0
         for x in range(len(self.level_1)):
             for y in range(len(self.level_1[x])):
                 if self.level_1[x][y]==1:
-                    caja=caja+1
-        print("CAJAS RESTANTES ",caja)
+                    self.caja1=self.caja1+1
+        print("CAJAS RESTANTES ",self.caja1)
 
-#CAMBIO DE NIVEL
-        if caja==0:
-            print("FELICIDADES,HAS SUPERADO EL NIVEL")
-        if caja==0:
-            self.con=raw_input("DESEA CONTINUAR?    Y=YES    N=NO")
-        if self.con=="Y" or self.con=="y":
-            print("CARGANDO SIGUIENTE NIVEL")
-        if self.con=="N" or self.con=="n":
-            print("GRACIAS POR JUGAR")
+    def cont_cajas2 (self):
+        self.caja2=0
+        for x in range(len(self.level_1)):
+            for y in range(len(self.level_1[x])):
+                if self.level_1[x][y]==1:
+                    self.caja2=self.caja2+1
+        print("CAJAS RESTANTES ",self.caja2)
+        
 
-    def jugar(self):
-        self.crear()
-        self.posicion()
+    def jugarNivel1(self):
+        print("WELCOME TO SOKOBAN")
+        print("--------------------------------------")
+        print("----------NIVEL 1----------")
+        print("--------------------------------------")
+        print("powers: G-right,J-left,Y-up,H-down ")
+        self.crear_1()
+        self.posicion_1()
         while True:
-            self.mapa()
-            self.cont_cajas()
+            self.mapa_1()
+            self.cont_cajas1()
 #movimientos
-            move=raw_input("D-right,A-left,W-up,S-down,")
-            if move == "d" or move=="D" :
+            move1=raw_input("D-right,A-left,W-up,S-down")
+            if move1 == "d" or move1=="D" :
                 self.derecha()
-            elif move=="a" or move=="A":
+            elif move1=="a" or move1=="A":
                 self.izquierda()
-            elif move=="s" or move=="S":
+            elif move1=="s" or move1=="S":
                 self.abajo()
-            elif move=="w" or move=="W":
+            elif move1=="w" or move1=="W":
                 self.arriba()
+            if self.caja1==0:
+                print("FELICIDADES,HAS SUPERADO EL NIVEL")
+            if self.caja1==0:
+                self.con=raw_input("DESEA CONTINUAR?    Y=YES    N=NO")
+            if self.con=="Y" or self.con=="y":
+                print("CARGANDO SIGUIENTE NIVEL")
+                self.jugarNivel2()
+
 #poderes
                 self.power=raw_input
-            elif move=="j" or move=="J":
+            elif move1=="j" or move1=="J":
                 self.poder_der()
-            elif move=="g" or move=="G":
+            elif move1=="g" or move1=="G":
                 self.poder_izq()
-            elif move=="y" or move=="Y":
+            elif move1=="y" or move1=="Y":
                 self.poder_arriba()
-            elif move=="h" or move=="H":
+            elif move1=="h" or move1=="H":
                 self.poder_abajo()
             os.system("cls")
 
+
+    def jugarNivel2(self):
+        print("--------------------------------------")
+        print("----------NIVEL 2----------")
+        print("--------------------------------------")
+        print("powers: G-right,J-left,Y-up,H-down ")
+        self.crear_2()
+        self.posicion_2()
+        while True:
+            self.mapa_2()
+            self.cont_cajas2()
+#movimientos
+            move2=raw_input("D-right,A-left,W-up,S-down")
+            if move2 == "d" or move2=="D" :
+                self.derecha()
+            elif move2=="a" or move2=="A":
+                self.izquierda()
+            elif move2=="s" or move2=="S":
+                self.abajo()
+            elif move2=="w" or move2=="W":
+                self.arriba()
+
+#poderes
+                self.power=raw_input
+            elif move2=="j" or move2=="J":
+                self.poder_der()
+            elif move2=="g" or move2=="G":
+                self.poder_izq()
+            elif move2=="y" or move2=="Y":
+                self.poder_arriba()
+            elif move2=="h" or move2=="H":
+                self.poder_abajo()
+            os.system("cls")
+
+
 sphinx=Sokoban()
-sphinx.jugar()
+sphinx.jugarNivel1()
+sphinx.jugarNivel2()
 
